@@ -59,15 +59,3 @@ This project introduces several key concepts beyond a standard RL setup:
         * In each step: gets agent action, steps environment, gets next state info, simulates human action based on $Q_h$, calls agent's `update` method.
     * Logs rewards and success rates.
     * Optionally plots results.
-
-## Dependencies
-
-* `numpy`
-* `minigrid`
-* `matplotlib` (optional, for plotting in `main.py`)
-
-Install dependencies using pip:
-```bash
-pip install numpy minigrid matplotlib
-How to RunInstall the dependencies listed above.Place the files (minigrid_power_env.py, iql_agent.py, main.py) in the same directory.Configure parameters in main.py:Environment settings (env_config).The Robot's set of considered potential goals (potential_goals).The Robot's goal prior (goal_prior).Agent hyperparameters (learning rates alpha_h, alpha_r, discount factors gamma_h, gamma_r, human rationality beta_h, exploration epsilon_r, power parameters eta, f_func).Training loop settings (num_episodes).Run the main script from your terminal:python main.py
-Notes & Potential ExtensionsState Space: The current tabular state (agent_pos, human_pos) is simple but grows quadratically with grid size. It ignores agent direction and object states. For more complex environments, function approximation (Deep Q-Networks) would be needed instead of tabular Q-learning.Human NPC: The current NPC is deterministic and simple. A more complex or stochastic NPC could be used. Remember the agent only observes the NPC's effect via state changes and rhobs​, it doesn't know the NPC's internal logic.Robot Reward: The internal reward rrcalc​ drives the Robot's behavior. Tuning the potential goal set G, prior μg​, function f, and parameter η is crucial for achieving desired emergent behaviors.Algorithm 2: This codebase implements Algorithm 1. Implementing Algorithm 2 (two-phase learning with the cautious Qm​ human model) would require significant changes to the agent logic, including storing Qm​ and implementing the two distinct learning phases.MiniGrid Actions: The current agent maps its internal actions (0-3) to MiniGrid movement actions. It could be extended to use other actions like toggle, pickup, `
